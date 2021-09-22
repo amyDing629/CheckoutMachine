@@ -16,6 +16,9 @@ class Item:
     
     def get_price(self) -> str:
         return self.price
+    
+    def get_discount(self) -> float:
+        return self.discount
 
     def change_name(self, update_name: str) -> None:
         self.name = update_name
@@ -23,5 +26,5 @@ class Item:
     def change_price(self, update_price: float) -> None:
         self.price = update_price
 
-    def add_discount(self, discount: float) -> None:
+    def change_discount(self, discount: float) -> None:
         self.discount = discount
