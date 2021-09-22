@@ -1,6 +1,6 @@
 from typing import List, Tuple
-from item import Item
-from gateway import Gateway
+from backend.item import Item
+from backend.gateway import Gateway
 class CheckOut:
     """
     Use case for checking out items.
@@ -20,6 +20,9 @@ class CheckOut:
         for item_info in self.item_list:
             if item_info[0].get_name() == item_name:
                 return item_info
+    
+    def get_item_list(self) -> List[Tuple[Item, int]]:
+        return self.item_list
 
     def add_item_to_list(self, item_name: str, quantity: int) -> bool:
         """

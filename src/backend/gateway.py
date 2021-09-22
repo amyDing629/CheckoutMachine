@@ -1,6 +1,6 @@
 import csv
 from typing import List
-from item import Item
+from backend.item import Item
 class Gateway:
     def _get_item_list(self) -> List[Item]:
         item_list = []
