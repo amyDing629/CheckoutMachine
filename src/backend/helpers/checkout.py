@@ -60,5 +60,5 @@ class CheckOut:
         """
         total_sum = 0
         for item_info in self.item_list:
-            total_sum += item_info[0].get_price()*item_info[1]
+            total_sum += item_info[0].get_price()*item_info[1]*(1+self.tax)*(1-item_info[0].get_discount())
         return total_sum
