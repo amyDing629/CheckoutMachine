@@ -1,0 +1,13 @@
+<html>
+   <body>
+      <form action = "{% url 'additem' %}" method = "post">
+         {% csrf_token %}
+         <p>Enter Name:</p>
+         <p><input type = "text" name = "name" /></p>
+         <p>Enter Quantity:</p>
+         <p><input type = "text" name = "quantity" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+         <p><input type = "button" value = "back" /></p>
+      </form>   
+   </body>
+</html>
