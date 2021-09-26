@@ -6,9 +6,10 @@ checkout = CheckOut()
 def index(request):
     item_list = []
     for item_info in checkout.get_item_list():
-        item_list.append(item_info[0].get_name() + ' ' + str(item_info[1]) \
-            + ' ' + str(item_info[0].get_price()))
-    return render(request, 'index.html', {'item_list': item_list})
+        item_list.append(item_info[0].get_name() + ' ' + str(item_info[0].get_price()) \
+            + ' ' + str(item_info[1]))
+    checkout_price = checkout.count_sum()
+    return render(request, 'index.html', {'item_list': item_list, 'checkout_price': checkout_price})
 
 def additem(request):
     if request.method == "POST":

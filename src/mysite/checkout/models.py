@@ -67,6 +67,11 @@ class CheckOut(models.Model):
         """
         gateway = Gateway()
         if gateway.check_item_in_database(item_name):
+            item_list = self.get_item_list()
+            for i in range(len(item_list)):
+                if item_list[i][0].get_name() == item_name:
+                    item_list[i] = (item_list[i][0], item_list[i][1] + quantity)
+                    return True
             price = gateway.get_price_by_name(item_name)
             self.item_list.append((Item(item_name, price), quantity))
             return True
@@ -97,7 +102,7 @@ class CheckOut(models.Model):
         """
         total_sum = 0
         for item_info in self.item_list:
-            total_sum += item_info[0].get_price()*item_info[1]*(1+self.tax)*(1-item_info[0].get_discount())
+            total_sum += float(item_info[0].get_price())*int(item_info[1])*(1+self.tax)*(1-item_info[0].get_discount())
         return total_sum
 
 

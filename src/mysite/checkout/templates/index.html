@@ -7,10 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <p> name price quantity</p>
     {% for item in item_list %}
         <p>{{item}}</p>
     {% endfor %}
-    
+    <p> Checkout Price: {{checkout_price}}</p>
     <br><br>
     <a href="additem">Add</a>
     <br><br>
