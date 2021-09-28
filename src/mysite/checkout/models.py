@@ -164,3 +164,13 @@ class Gateway(models.Model):
             if item.get_name() == name:
                 return item.get_price()
 
+    def edit_item_price(self, name: str, price: float) -> None:
+        item_list = self._get_item_list()
+        if self.check_item_in_database(name):
+            for item in item_list:
+                if item.get_name() == name:
+                    item.change_price(price)
+        self._write_list_to_file(item_list)
+            
+
+

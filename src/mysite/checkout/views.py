@@ -18,4 +18,10 @@ def additem(request):
         checkout.add_item_to_list(name, int(quantity))
         return redirect('index')
     return render(request, 'additem.html')
+
+def database_opt(request):
+    name = request.POST.get("name")
+    quantity = request.POST.get("quantity")
+    return
+
     
