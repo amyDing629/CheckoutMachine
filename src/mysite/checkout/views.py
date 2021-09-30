@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import CheckOut
+from .models import CheckOut, Gateway
 checkout = CheckOut()
+gateway = Gateway
 def index(request):
     item_list = []
     for item_info in checkout.get_item_list():
@@ -20,8 +21,14 @@ def additem(request):
     return render(request, 'additem.html')
 
 def database_opt(request):
-    name = request.POST.get("name")
-    quantity = request.POST.get("quantity")
-    return
-
-    
+    if request.method == "POST":
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        # form = database_opt(request.POST)
+        if request.POST.get("edit"):
+            gateway.edit_item_price(name, int(price))
+        if request.POST.get("remove"):
+            gateway.remove_item_from_database(name)
+        if request.POST.get("add"):
+            gateway.add_item_to_database(name, int(price))
+    return render(request, 'database_opt.html')

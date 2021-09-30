@@ -7,12 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+  <form action = "{% url 'database_opt' %}" method = "post"> 
+    {% csrf_token %}
     <p>Enter Name:</p>
-      <p><input type = "text" name = "name" /></p>
-      <p>Enter Quantity:</p>
-      <p><input type = "text" name = "quantity" /></p>
-    <button>remove </button>
-    <button>add</button>
-    <button>edit</button>
+    <p><input type = "text" name = "name" /></p>
+    <p>Enter Price:</p>
+    <p><input type = "text" name = "price" /></p>
+   
+    <button  type="submit" name="remove" value="remove">remove </button>
+    <button  type="submit" name="add" value="add">add</button>
+    <button  type="submit" name="edit" value="edit">edit</button>
+   
+   </form>
+    
+    
 </body>
 </html>
