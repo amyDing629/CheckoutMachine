@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import CheckOut, Gateway
 checkout = CheckOut()
-gateway = Gateway
+gateway = Gateway()
 def index(request):
     item_list = []
     for item_info in checkout.get_item_list():
@@ -31,4 +31,4 @@ def database_opt(request):
             gateway.remove_item_from_database(name)
         if request.POST.get("add"):
             gateway.add_item_to_database(name, int(price))
-    return render(request, 'database_opt.html')
+    return render(request, 'database_opt.html') 
