@@ -19,7 +19,7 @@ class Item(models.Model):
     def get_name(self) -> str:
         return self.name
     
-    def get_price(self) -> str:
+    def get_price(self) -> float:
         return self.price
     
     def get_discount(self) -> float:
@@ -84,11 +84,10 @@ class CheckOut(models.Model):
         If quantity equals or larger, remove item
         """
         item_info = self.get_item_by_name(item_name)
+        self.item_list.remove(item_info)
         if quantity < item_info[1]:
-            item_info[1] -= quantity
-        else:
-            self.item_list.remove(item_info)
-
+            self.item_list.append((item_info[0], item_info[1] - quantity))
+    
     def add_discount(self, item_name, discount: float) -> None:
         """
         Change item's discount value
@@ -103,6 +102,7 @@ class CheckOut(models.Model):
         total_sum = 0
         for item_info in self.item_list:
             total_sum += float(item_info[0].get_price())*int(item_info[1])*(1+self.tax)*(1-item_info[0].get_discount())
+        total_sum = float(format(total_sum, '.2f'))
         return total_sum
 
 
@@ -112,7 +112,7 @@ class Gateway(models.Model):
         with open(DATA_FILE_PATH, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                item_list.append(Item(row['name'], row['price']))
+                item_list.append(Item(row['name'], float(row['price'])))
         return item_list
     
     def _write_list_to_file(self, item_list: List[Item]):
