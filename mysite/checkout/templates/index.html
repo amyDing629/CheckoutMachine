@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <p> name price quantity</p>
+    {% for item in item_list %}
+        <p>{{item}}</p>
+    {% endfor %}
+    <p> Checkout Price: {{checkout_price}}</p>
+    <br><br>
+    <a href="additem">Add</a>
+    <br><br>
+    <input type="submit" value="Submit">
+    <a href="database_opt">Option</a>
+</body>
+</html>
