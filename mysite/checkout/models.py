@@ -1,6 +1,6 @@
 from django.db import models
 import csv
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 DATA_FILE_PATH = 'items.csv'
 class Item(models.Model):
     """
@@ -50,6 +50,9 @@ class CheckOut(models.Model):
     def change_tax(self, tax: float) -> None:
         self.tax = tax
 
+    def get_tax(self) -> float:
+        return self.tax
+
     def get_item_by_name(self, item_name: str) -> Tuple[Item, int]:
         for item_info in self.item_list:
             if item_info[0].get_name() == item_name:
@@ -76,8 +79,15 @@ class CheckOut(models.Model):
             self.item_list.append((Item(item_name, price), quantity))
             return True
         return False
+    
+    def edit_price(self, item_name: str, price: float) -> None:
+        Gateway().edit_item_price(item_name, price)
+        for item_info in self.get_item_list():
+            if item_info[0].get_name() == item_name:
+                self.remove_item_from_list(item_name, None)
+                self.add_item_to_list(item_name, item_info[1])
         
-    def remove_item_from_list(self, item_name: str, quantity: int) -> None:
+    def remove_item_from_list(self, item_name: str, quantity: Optional[int]) -> None:
         """
         Remove item from item list.
         If quantity smaller than previous item quantity, exist quantity = previous quantity - removed quantity.
@@ -85,8 +95,9 @@ class CheckOut(models.Model):
         """
         item_info = self.get_item_by_name(item_name)
         self.item_list.remove(item_info)
-        if quantity < item_info[1]:
-            self.item_list.append((item_info[0], item_info[1] - quantity))
+        if quantity is not None:
+            if quantity < item_info[1]:
+                self.item_list.append((item_info[0], item_info[1] - quantity))
     
     def add_discount(self, item_name, discount: float) -> None:
         """
@@ -104,7 +115,6 @@ class CheckOut(models.Model):
             total_sum += float(item_info[0].get_price())*int(item_info[1])*(1+self.tax)*(1-item_info[0].get_discount())
         total_sum = float(format(total_sum, '.2f'))
         return total_sum
-
 
 class Gateway(models.Model):
     def _get_item_list(self) -> List[Item]:
@@ -135,15 +145,21 @@ class Gateway(models.Model):
             return True
         return False
 
-    def remove_item_from_database(self, name: str) -> None:
+    def remove_item_from_database(self, name: str) -> bool:
         """
         Remove item with input name from database.
+        If item not in database, remove nothing.
+        Return true if item is in database and is removed.
+        Return False if item is not in database.
         """
+        if not self.check_item_in_database(name):
+            return False
         item_list = self._get_item_list()
         for item in item_list:
             if item.get_name() == name:
                 item_list.remove(item)
         self._write_list_to_file(item_list)
+        return True
 
     def check_item_in_database(self, name: str) -> bool:
         """
@@ -164,13 +180,21 @@ class Gateway(models.Model):
             if item.get_name() == name:
                 return item.get_price()
 
-    def edit_item_price(self, name: str, price: float) -> None:
+    def edit_item_price(self, name: str, price: float) -> bool:
+        """
+        Edit item's price. 
+        Return true is item in database.
+        Return false if item is not in database.
+        """
+        if not self.check_item_in_database(name):
+            return False
         item_list = self._get_item_list()
         if self.check_item_in_database(name):
             for item in item_list:
                 if item.get_name() == name:
                     item.change_price(price)
         self._write_list_to_file(item_list)
+        return True
             
 
 

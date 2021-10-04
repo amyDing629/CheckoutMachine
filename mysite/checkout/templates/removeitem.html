@@ -9,13 +9,13 @@
    <title>Document</title>
 </head>
 <body>
-   <form action = "{% url 'additem' %}" method = "post">
+   <form action = "{% url 'removeitem' %}" method = "post">
       {% csrf_token %}
       <p>Enter Name:</p>
       <p><input type = "text" name = "name" /></p>
       <p>Enter Quantity:</p>
       <p><input type = "text" name = "quantity" /></p>
-      <button  type="submit" name="additem" value="additem">add item</button>
+      <button  type="submit" name="removeitem" value="removeitem">remove item</button>
       <button  type="submit" name="back" value="back">back</button>
    </form>  
 </body>

@@ -9,13 +9,18 @@
     <title>Index</title>
 </head>
 <body>
-    <p> name price quantity</p>
+    <p> name, price, quantity</p>
     {% for item in item_list %}
         <p>{{item}}</p>
     {% endfor %}
+    <p> Tax: {{tax}}</p>
     <p> Checkout Price: {{checkout_price}}</p>
     <br><br>
     <a href="additem">Add Item</a>
+    <br><br>
+    <a href="removeitem">Remove Item</a>
+    <br><br>
+    <a href="edittax">Edit Tax</a>
     <br><br>
     <a href="database_opt">Update Available Items</a>
 </body>
