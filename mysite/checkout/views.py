@@ -14,10 +14,13 @@ def index(request):
 
 def additem(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        quantity = request.POST.get("quantity")
-        checkout.add_item_to_list(name, int(quantity))
-        return redirect('index')
+        if request.POST.get("additem"):
+            name = request.POST.get("name")
+            quantity = request.POST.get("quantity")
+            checkout.add_item_to_list(name, int(quantity))
+            return redirect('index')
+        if request.POST.get("back"):
+            return redirect('index')
     return render(request, 'additem.html')
 
 def database_opt(request):
@@ -31,4 +34,6 @@ def database_opt(request):
             gateway.remove_item_from_database(name)
         if request.POST.get("add"):
             gateway.add_item_to_database(name, int(price))
+        if request.POST.get("back"):
+            return redirect('index')
     return render(request, 'database_opt.html') 
