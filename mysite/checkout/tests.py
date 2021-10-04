@@ -6,6 +6,11 @@ class testModels(TestCase):
         self.CheckOut = CheckOut()
         self.CheckOut.item_list = []
         self.CheckOut.tax = 0.12
+        Gateway().add_item_to_database('apple', 2)
+        Gateway().add_item_to_database('pear', 3)
+        Gateway().add_item_to_database('banana', 1)
+        Gateway().add_item_to_database('hat', 10)
+        Gateway().add_item_to_database('orange', 3)
         self.CheckOut.add_item_to_list("apple", 2)
         self.CheckOut.add_item_to_list("pear", 3)
         self.CheckOut.add_item_to_list("banana", 4)
@@ -19,7 +24,7 @@ class testModels(TestCase):
 
     def test_add_item_to_list(self):
         self.assertTrue(self.CheckOut.add_item_to_list("apple", 2))
-        self.assertTrue(self.CheckOut.add_item_to_list("pear", 3))
+        self.assertTrue(self.CheckOut.add_item_to_list("pear", 2))
         self.assertTrue(self.CheckOut.add_item_to_list("banana", 4))
         self.assertTrue(self.CheckOut.add_item_to_list("hat", 5))
         self.assertTrue(self.CheckOut.add_item_to_list("orange", 6))
@@ -43,7 +48,7 @@ class testModels(TestCase):
         self.assertIsNone(self.CheckOut.get_item_by_name("hat"))
 
     def test_count_sum(self):
-        self.assertEqual(self.CheckOut.count_sum(), 95.20)
+        self.assertEqual(self.CheckOut.count_sum(), 95.2)
 
     def test_add_discount(self):
         self.CheckOut.add_discount("apple", 0.1)
