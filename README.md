@@ -1,7 +1,7 @@
 CSC301H Assignment 1
 # A1 deployment video link(ggogle drive share link)
 https://drive.google.com/file/d/1H66g_olIGCNCH_6VeHuG64eQCUvP-_1S/view?usp=sharing
-
+gi
 # Running process
 ## step 1
 Git clone the repository, open in local
@@ -36,6 +36,12 @@ Then run the command line
 ```
 $ python manage.py runserver
 ```
+
+## step 5 Test the project
+```
+$ python manage.py test
+```
+
 # Conditions
 ## add item into check out list
 * If item is already added into the checkout list, then add the new quantity to the checkout quantity. If item has not been added into the checkout list, then add the item and the quantity to the checkout list.
