@@ -27,10 +27,17 @@ Three python web development frameworks are considered, which are Django, Pyrami
 We want out applications to have the extension potential. Therefore, Flask, as a microframwork, might not be sufficient. Choosing from Django and Pyramid, Django is easier to start with (don't need extra libraries or plug ins), Django is finally chosen.
 
 ## frontend
-html
+HTML and CSS
+CSS - change our font and beautify the page
 
 ## database
 relational database
 
-## CICD
-unittest
+## CI/CD
+use Django.TestCase to write testcases
+We use Circleci as our CI/CD tool to automate test cases.
+Below is our result.
+![image info](./screenshots/1.png)
+![image info](./screenshots/2.png)
+![image info](./screenshots/3.png)
+![image info](./screenshots/4.png)

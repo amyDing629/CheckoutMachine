@@ -1,4 +1,4 @@
-The project is a web application about price calculator. The tech stack is Python Django framework for backend and
-HTML for frontend. For CI/CD, we use the Django.testcase framework for testing. 
-For the database, since we choose tos tore the information of the item in .CSV file since we only save the item name
-and price in the file.
+The project is a web application about price calculator. 
+The tech stack is Python Django framework for backend, HTML and CSS for frontend. For CI/CD, we use the Django.testcase framework for testing, we use circleci as our tool for automation test. For the database, we choose to store the information of the item in .CSV file since we only save the item nameand price in the file. 
+
+Since We both have experiences in Python before, and we want our applications to have the extension potential, easy to build and have sufficient community support. Also, since this application is pretty small now, its processing speed is not a big issue. Also, with Python's good integration ability, Python is finally chosen. Also, We want out applications to have the extension potential. Therefore, Flask, as a microframwork, might not be sufficient. Choosing from Django and Pyramid, Django is easier to start with (don't need extra libraries or plug ins), Django is finally chosen.
